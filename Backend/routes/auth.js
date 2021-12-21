@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/Users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const fetchuser = require("../middleware/fetchuser");
 
 const JWT_SECRET = "anujyadav@1122";
 
@@ -10,6 +11,7 @@ const { body, validationResult } = require("express-validator");
 
 //TODO:in reactApp post request on this /api/auth endpoint
 
+//router for creating new user
 router.post(
   "/createuser",
   [
@@ -62,6 +64,7 @@ router.post(
   }
 );
 
+//router for login the user
 router.post(
   "/login",
   [
@@ -102,5 +105,17 @@ router.post(
     }
   }
 );
+
+//router for get loggedin user details using POST 'api/auth/getuser' login required
+router.post("/getuser", fetchuser, async (req, res) => {
+  try {
+    userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
+    res.send(user);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 
 module.exports = router;
