@@ -1,4 +1,5 @@
 import React from "react";
+import Notes from "./Notes";
 
 export default function Home() {
   return (
@@ -44,10 +45,9 @@ export default function Home() {
             Submit
           </button>
         </form>
-        <section className="container my-4">
-          <h1>Your notes</h1>
-        </section>
       </div>
+
+      <Notes />
     </section>
   );
 }
