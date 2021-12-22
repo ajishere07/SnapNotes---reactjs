@@ -10,7 +10,12 @@ function Notes() {
     <div className="row my-3">
       <h1>Your notes</h1>
       {notes.map((note) => (
-        <NoteItem title={note.title} desc={note.description} tag={note.tag} />
+        <NoteItem
+          key={note._id}
+          title={note.title}
+          desc={note.description}
+          tag={note.tag}
+        />
       ))}
     </div>
   );
