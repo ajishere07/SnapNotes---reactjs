@@ -28,7 +28,7 @@ export default function SingUp() {
     if (json.success) {
       setTimeout(() => {
         toast.success("your acc. is created");
-        localStorage.setItem(`token`, json.jwtAuthToken);
+        localStorage.setItem("token", json.jwtAuthToken);
       }, 2000);
       navigate("/");
       setCredentials({ name: "", email: "", password: "" });

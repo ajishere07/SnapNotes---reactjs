@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import NoteContext from "./NoteContext";
+import { toast } from "react-toastify";
 
 const NotesStates = (props) => {
   const host = "http://localhost:5000";
@@ -10,8 +11,7 @@ const NotesStates = (props) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFjNDE3ODI3OGYxZTI4ZjhlMGNhOWJjIn0sImlhdCI6MTY0MDI0MTI2MH0.3HxO8-DohUQaXTOc0-lQyZOaFY8FY-LTsZF8sGY1gb4",
+        "auth-token": localStorage.getItem(`token`),
       },
     });
     const notesData = await res.json();
@@ -25,23 +25,18 @@ const NotesStates = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFjNDE3ODI3OGYxZTI4ZjhlMGNhOWJjIn0sImlhdCI6MTY0MDI0MTI2MH0.3HxO8-DohUQaXTOc0-lQyZOaFY8FY-LTsZF8sGY1gb4",
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({ title, description, tag }),
     });
-
-    console.log("adding new note");
-    const note = {
-      _id: "61c36a58c79e5ea68289244d9",
-      user: "61c1e00c2b4f674c4a027634",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2021-12-22T18:11:40.401Z",
-      __v: 0,
-    };
-    setNotes([...notes, note]);
+    const json = await res.json();
+    console.log(json);
+    if (json.errors) {
+      toast.error("Something went wrong");
+      return;
+    }
+    setNotes([...notes, json]);
+    toast.success("Your Note has been added");
   };
   //function for deleting a note
   const deleteNote = async (id) => {
@@ -50,15 +45,20 @@ const NotesStates = (props) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFjNDE3ODI3OGYxZTI4ZjhlMGNhOWJjIn0sImlhdCI6MTY0MDI0MTI2MH0.3HxO8-DohUQaXTOc0-lQyZOaFY8FY-LTsZF8sGY1gb4",
+        "auth-token": localStorage.getItem("token"),
       },
     });
-
+    const json = await res.json();
+    console.log(json);
     const newNotes = notes.filter((note) => {
       return note._id !== id;
     });
+    if (json.errors) {
+      toast.error("Something went wrong");
+      return;
+    }
     setNotes(newNotes);
+    toast.success("Note has deleted");
   };
   //function for editing a note
   const editNote = async (id, title, description, tag) => {
@@ -67,8 +67,7 @@ const NotesStates = (props) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFjNDE3ODI3OGYxZTI4ZjhlMGNhOWJjIn0sImlhdCI6MTY0MDI0MTI2MH0.3HxO8-DohUQaXTOc0-lQyZOaFY8FY-LTsZF8sGY1gb4",
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({ title, description, tag }),
     });
@@ -85,8 +84,9 @@ const NotesStates = (props) => {
       }
       index++;
     }
-    console.log(newNotesArr);
+
     setNotes(newNotesArr);
+    toast.success("Your Note has been edited");
   };
   const [notes, setNotes] = useState(notesData);
   return (

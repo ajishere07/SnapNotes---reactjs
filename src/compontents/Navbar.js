@@ -45,20 +45,28 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          <form className="d-flex">
-            {/* <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            /> */}
-            <Link to="/login" className="btn btn-primary mx-2" role="button">
-              Login
-            </Link>
-            <Link to="/signup" className="btn btn-primary mx-2" role="button">
-              Sign up
-            </Link>
-          </form>
+          {localStorage.getItem("token") ? (
+            <form className="d-flex">
+              <button
+                className="btn btn-primary mx-2"
+                role="button"
+                onClick={() => {
+                  localStorage.removeItem("token");
+                }}
+              >
+                Logout
+              </button>
+            </form>
+          ) : (
+            <form className="d-flex">
+              <Link to="/login" className="btn btn-primary mx-2" role="button">
+                Login
+              </Link>
+              <Link to="/signup" className="btn btn-primary mx-2" role="button">
+                Sign up
+              </Link>
+            </form>
+          )}
         </div>
       </div>
     </nav>

@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import NoteContext from "../contexts/notes/NoteContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function NoteItem({ title, desc, tag, _id, updateNoteModal }) {
   const context = useContext(NoteContext);
@@ -21,6 +23,7 @@ export default function NoteItem({ title, desc, tag, _id, updateNoteModal }) {
           />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

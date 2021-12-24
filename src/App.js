@@ -17,8 +17,8 @@ function App() {
           <Routes>
             <Route path="/about" element={<About />} />
             <Route exact path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SingUp />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/signup" element={<SingUp />} />
           </Routes>
         </div>
       </NotesStates>

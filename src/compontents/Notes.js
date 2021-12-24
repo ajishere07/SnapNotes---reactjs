@@ -3,7 +3,12 @@ import NoteContext from "../contexts/notes/NoteContext";
 import NoteItem from "./NoteItem";
 import AddNewNote from "./AddNewNote";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router";
+
 function Notes() {
+  const navigate = useNavigate();
   const context = useContext(NoteContext);
   const { notes, fetchNotes, editNote } = context;
   const [note, setNote] = useState({
@@ -13,7 +18,11 @@ function Notes() {
     etag: "",
   });
   useEffect(() => {
-    fetchNotes();
+    if (localStorage.getItem("token")) {
+      fetchNotes();
+    } else {
+      navigate("/login");
+    }
   }, []);
   const updateNoteModal = (currentNote) => {
     ref.current.click();
@@ -160,6 +169,7 @@ function Notes() {
           ))
         )}
       </div>
+      <ToastContainer />
     </>
   );
 }

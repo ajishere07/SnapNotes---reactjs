@@ -21,7 +21,7 @@ export default function Login() {
     const json = await res.json();
     if (json.success) {
       toast.success("Successfully, Logged In");
-      localStorage.setItem(`token`, json.jwtAuthToken);
+      localStorage.setItem("token", json.jwtAuthToken);
       setTimeout(() => {
         navigate("/");
       }, 3000);
