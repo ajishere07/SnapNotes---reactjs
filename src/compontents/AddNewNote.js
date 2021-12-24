@@ -7,6 +7,7 @@ function AddNewNote() {
   const handleAddNote = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
+    setNote({ title: "", description: "", tag: "" });
   };
   const inputHandle = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
@@ -25,6 +26,7 @@ function AddNewNote() {
             id="title"
             name="title"
             aria-describedby="emailHelp"
+            value={note.title}
             onChange={inputHandle}
           />
         </div>
@@ -37,6 +39,7 @@ function AddNewNote() {
             className="form-control"
             id="description"
             name="description"
+            value={note.description}
             onChange={inputHandle}
           />
         </div>
@@ -49,11 +52,13 @@ function AddNewNote() {
             className="form-control"
             id="tag"
             name="tag"
+            value={note.tag}
             onChange={inputHandle}
           />
         </div>
 
         <button
+          disabled={note.title.length < 5 || note.description.length < 5}
           type="submit"
           className="btn btn-primary"
           onClick={handleAddNote}

@@ -85,6 +85,8 @@ function Notes() {
                   aria-describedby="emailHelp"
                   value={note.etitle}
                   onChange={inputHandle}
+                  minLength={5}
+                  required
                 />
               </div>
               <div className="mb-3">
@@ -98,6 +100,8 @@ function Notes() {
                   id="edescription"
                   name="edescription"
                   onChange={inputHandle}
+                  minLength={5}
+                  required
                 />
               </div>
               <div className="mb-3">
@@ -111,6 +115,8 @@ function Notes() {
                   id="etag"
                   name="etag"
                   onChange={inputHandle}
+                  minLength={5}
+                  required
                 />
               </div>
             </form>
@@ -124,6 +130,9 @@ function Notes() {
                 Close
               </button>
               <button
+                disabled={
+                  note.etitle.length < 5 || note.edescription.length < 5
+                }
                 type="button"
                 className="btn btn-primary"
                 onClick={handleEdit}
@@ -136,16 +145,20 @@ function Notes() {
       </div>
       <h1>Your notes</h1>
       <div className="row my-3">
-        {notes.map((note) => (
-          <NoteItem
-            key={note._id}
-            _id={note._id}
-            title={note.title}
-            desc={note.description}
-            tag={note.tag}
-            updateNoteModal={updateNoteModal}
-          />
-        ))}
+        {notes.length === 0 ? (
+          <h3>No notes; Add note for your tasks, ideas, assigments</h3>
+        ) : (
+          notes.map((note) => (
+            <NoteItem
+              key={note._id}
+              _id={note._id}
+              title={note.title}
+              desc={note.description}
+              tag={note.tag}
+              updateNoteModal={updateNoteModal}
+            />
+          ))
+        )}
       </div>
     </>
   );
