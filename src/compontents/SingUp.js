@@ -26,11 +26,12 @@ export default function SingUp() {
     const json = await res.json();
     console.log(json);
     if (json.success) {
+      toast.success("your acc. is created");
+      localStorage.setItem("token", json.jwtAuthToken);
       setTimeout(() => {
-        toast.success("your acc. is created");
-        localStorage.setItem("token", json.jwtAuthToken);
+        navigate("/");
       }, 2000);
-      navigate("/");
+
       setCredentials({ name: "", email: "", password: "" });
     } else {
       toast.error("Invalid credentials");

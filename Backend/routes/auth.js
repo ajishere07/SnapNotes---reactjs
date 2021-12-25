@@ -24,7 +24,7 @@ router.post(
 
   async (req, res) => {
     // if there are errors, return bad request and the errors
-    console.log(req.body);
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -54,11 +54,9 @@ router.post(
         },
       };
       const jwtAuthToken = jwt.sign(data, JWT_SECRET);
-      console.log(jwtAuthToken);
 
       res.json({ success: true, jwtAuthToken });
     } catch (err) {
-      console.log(err.message);
       res.status(500).send("Internal server error");
     }
   }
@@ -100,7 +98,6 @@ router.post(
       const jwtAuthToken = jwt.sign(data, JWT_SECRET);
       res.json({ success: true, jwtAuthToken });
     } catch (err) {
-      console.log(err.message);
       res.status(500).send("Internal server error");
     }
   }
@@ -113,7 +110,6 @@ router.post("/getuser", fetchuser, async (req, res) => {
     const user = await User.findById(userId).select("-password");
     res.send(user);
   } catch (err) {
-    console.log(err.message);
     res.status(500).send("Internal Server Error");
   }
 });
