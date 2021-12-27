@@ -2,33 +2,40 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { auth } from "../configuration/firebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
   const handleFormSubmission = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    });
-    const json = await res.json();
-    if (json.success) {
-      toast.success("Successfully, Logged In");
-      localStorage.setItem("token", json.jwtAuthToken);
-      setTimeout(() => {
-        navigate("/");
-      }, 3000);
-
-      setCredentials({ email: "", password: "" });
-    } else {
-      toast.error("Invalid Credentials");
+    if (!credentials.email || !credentials.password) {
+      toast.warn("All fields should be filled");
+      return;
+    }
+    try {
+      const result = await signInWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
+      setCredentials({
+        email: "",
+        password: "",
+      });
+      toast.success("You Logged in Successfully", {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message);
     }
   };
 

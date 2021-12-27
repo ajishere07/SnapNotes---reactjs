@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { signOut } from "@firebase/auth";
+import { auth } from "../configuration/firebaseConfig";
+import { AuthContext } from "../contexts/Auth";
 
 function Navbar() {
   let location = useLocation();
+  const { userAuthenticated } = useContext(AuthContext);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -45,13 +49,13 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          {localStorage.getItem("token") ? (
+          {userAuthenticated ? (
             <form className="d-flex">
               <button
                 className="btn btn-primary mx-2"
                 role="button"
-                onClick={() => {
-                  localStorage.removeItem("token");
+                onClick={async () => {
+                  await signOut(auth);
                 }}
               >
                 Logout

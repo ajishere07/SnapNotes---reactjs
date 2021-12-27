@@ -17,13 +17,13 @@ function Notes() {
     edescription: "",
     etag: "",
   });
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      fetchNotes();
-    } else {
-      navigate("/login");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     fetchNotes();
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // }, []);
   const updateNoteModal = (currentNote) => {
     ref.current.click();
     setNote({

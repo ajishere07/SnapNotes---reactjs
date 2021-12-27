@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { setDoc, doc, Timestamp } from "firebase/firestore";
+import { auth, db } from "../configuration/firebaseConfig";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function SingUp() {
@@ -12,29 +15,28 @@ export default function SingUp() {
   let navigate = useNavigate();
   const handleFormSubmission = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/api/auth/createuser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    if (!credentials.name || !credentials.email || !credentials.password) {
+      toast.warn("All fields should be filled");
+      return;
+    }
+    try {
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
+      await setDoc(doc(db, "users", result.user.uid), {
+        uid: result.user.uid,
         name: credentials.name,
         email: credentials.email,
         password: credentials.password,
-      }),
-    });
-    const json = await res.json();
-    console.log(json);
-    if (json.success) {
-      toast.success("your acc. is created");
-      localStorage.setItem("token", json.jwtAuthToken);
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
+        createdAt: Timestamp.fromDate(new Date()),
+      });
 
       setCredentials({ name: "", email: "", password: "" });
-    } else {
-      toast.error("Invalid credentials");
+      navigate("/");
+    } catch (err) {
+      toast.error(err.message);
     }
   };
   const handleInput = (e) => {

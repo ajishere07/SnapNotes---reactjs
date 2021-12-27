@@ -1,27 +1,32 @@
 import { Routes, Route } from "react-router-dom";
-import About from "./compontents/About";
-
-import Home from "./compontents/Home";
-import Login from "./compontents/Login";
-import Navbar from "./compontents/Navbar";
-import SingUp from "./compontents/SingUp";
+import About from "./components/About";
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Navbar from "./components/Navbar";
+import SignUp from "./components/SignUp";
 import NotesStates from "./contexts/notes/NotesStates";
 
+import AuthProvider from "./contexts/Auth";
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <>
-      <NotesStates>
-        <Navbar />
+      <AuthProvider>
+        <NotesStates>
+          <Navbar />
 
-        <div className="container">
-          <Routes>
-            <Route path="/about" element={<About />} />
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/signup" element={<SingUp />} />
-          </Routes>
-        </div>
-      </NotesStates>
+          <div className="container">
+            <Routes>
+              <Route element={<ProtectedRoute />}>
+                <Route exact path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+              </Route>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+            </Routes>
+          </div>
+        </NotesStates>
+      </AuthProvider>
     </>
   );
 }
