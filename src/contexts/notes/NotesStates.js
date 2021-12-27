@@ -13,7 +13,6 @@ import {
   deleteDoc,
 } from "@firebase/firestore";
 const NotesStates = (props) => {
-  const host = "http://localhost:5000";
   const [notes, setNotes] = useState([]);
 
   // FETCHING DATA FROM THE FIRESTORE DATABASE

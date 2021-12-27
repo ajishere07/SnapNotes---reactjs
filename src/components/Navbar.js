@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { signOut } from "@firebase/auth";
 import { auth } from "../configuration/firebaseConfig";
@@ -53,7 +53,6 @@ function Navbar() {
             <form className="d-flex">
               <button
                 className="btn btn-primary mx-2"
-                role="button"
                 onClick={async () => {
                   await signOut(auth);
                 }}
