@@ -6,10 +6,12 @@ import AddNewNote from "./AddNewNote";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../contexts/Auth";
 
 function Notes() {
   const navigate = useNavigate();
   const context = useContext(NoteContext);
+  const { userAuthenticated } = useContext(AuthContext);
   const { notes, fetchNotes, editNote } = context;
   const [note, setNote] = useState({
     eid: "",
@@ -17,13 +19,13 @@ function Notes() {
     edescription: "",
     etag: "",
   });
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     fetchNotes();
-  //   } else {
-  //     navigate("/login");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (userAuthenticated) {
+      fetchNotes(userAuthenticated.uid);
+    } else {
+      navigate("/login");
+    }
+  }, []);
   const updateNoteModal = (currentNote) => {
     ref.current.click();
     setNote({

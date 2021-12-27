@@ -1,41 +1,61 @@
 import React, { useState } from "react";
 import NoteContext from "./NoteContext";
 import { toast } from "react-toastify";
-
+import { db } from "../../configuration/firebaseConfig";
+import {
+  addDoc,
+  collection,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+} from "@firebase/firestore";
 const NotesStates = (props) => {
   const host = "http://localhost:5000";
-  const notesData = [];
+  const [notes, setNotes] = useState([]);
+
   //api call for get all notes
-  const fetchNotes = async () => {
-    const res = await fetch(`${host}/api/notes/allnotes`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem(`token`),
-      },
+  const fetchNotes = async (id) => {
+    const notesCollectionRef = collection(db, "notes");
+    console.log(id);
+    const queryObject = query(
+      notesCollectionRef,
+      where("userId", "==", `${id}`)
+    );
+    onSnapshot(queryObject, (snapshot) => {
+      let notes = [];
+      snapshot.docs.forEach((doc) => {
+        notes.push({ ...doc.data(), id: doc.id });
+      });
+      setNotes(notes);
     });
-    const notesData = await res.json();
-    console.log(notesData);
-    setNotes(notesData);
   };
   //function for adding a note
-  const addNote = async (title, description, tag) => {
-    //todo api call
-    const res = await fetch(`${host}/api/notes/addnote`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({ title, description, tag }),
+  const addNote = async (title, description, tag, id) => {
+    //firebase database reference
+    const notesCollectionRef = collection(db, "notes");
+    await addDoc(notesCollectionRef, {
+      userId: id,
+      title: title,
+      description: description,
+      tag: tag,
     });
-    const json = await res.json();
-    console.log(json);
-    if (json.errors) {
-      toast.error("Something went wrong");
-      return;
-    }
-    setNotes([...notes, json]);
+    //todo api call
+    // const res = await fetch(`${host}/api/notes/addnote`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "auth-token": localStorage.getItem("token"),
+    //   },
+    //   body: JSON.stringify({ title, description, tag }),
+    // });
+    // const json = await res.json();
+    // console.log(json);
+    // if (json.errors) {
+    //   toast.error("Something went wrong");
+    //   return;
+    // }
+    // setNotes([...notes, json]);
     toast.success("Your Note has been added");
   };
   //function for deleting a note
@@ -88,7 +108,7 @@ const NotesStates = (props) => {
     setNotes(newNotesArr);
     toast.success("Your Note has been edited");
   };
-  const [notes, setNotes] = useState(notesData);
+
   return (
     <NoteContext.Provider
       value={{ notes, addNote, deleteNote, editNote, fetchNotes }}

@@ -1,12 +1,15 @@
 import React, { useContext, useState } from "react";
+import { AuthContext } from "../contexts/Auth";
 import NoteContext from "../contexts/notes/NoteContext";
 function AddNewNote() {
   const context = useContext(NoteContext);
+  const { userAuthenticated } = useContext(AuthContext);
+
   const { addNote } = context;
   const [note, setNote] = useState({ title: "", description: "", tag: "" });
   const handleAddNote = (e) => {
     e.preventDefault();
-    addNote(note.title, note.description, note.tag);
+    addNote(note.title, note.description, note.tag, userAuthenticated.uid);
     setNote({ title: "", description: "", tag: "" });
   };
   const inputHandle = (e) => {

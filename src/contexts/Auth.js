@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     });
   }, []);
-  console.log(userAuthenticated);
+
   if (loading) return <Loading />;
   return (
     <AuthContext.Provider value={{ userAuthenticated }}>
