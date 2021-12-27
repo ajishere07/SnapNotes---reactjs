@@ -2,11 +2,16 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/Auth";
 import NoteContext from "../contexts/notes/NoteContext";
 function AddNewNote() {
-  const context = useContext(NoteContext);
+  //contexts
+
+  const { addNote } = useContext(NoteContext);
   const { userAuthenticated } = useContext(AuthContext);
 
-  const { addNote } = context;
+  //contexts
+
   const [note, setNote] = useState({ title: "", description: "", tag: "" });
+
+  //event handle methods
   const handleAddNote = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag, userAuthenticated.uid);
@@ -15,6 +20,7 @@ function AddNewNote() {
   const inputHandle = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
+  //event handle methods
   return (
     <div className="container my-4">
       <h1>Add note</h1>

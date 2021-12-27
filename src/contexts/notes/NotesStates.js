@@ -16,10 +16,13 @@ const NotesStates = (props) => {
   const host = "http://localhost:5000";
   const [notes, setNotes] = useState([]);
 
-  //api call for get all notes
+  // FETCHING DATA FROM THE FIRESTORE DATABASE
+
   const fetchNotes = async (id) => {
+    //firebase database reference
+
     const notesCollectionRef = collection(db, "notes");
-    console.log(id);
+
     const queryObject = query(
       notesCollectionRef,
       where("userId", "==", `${id}`)
@@ -32,70 +35,43 @@ const NotesStates = (props) => {
       setNotes(notes);
     });
   };
-  //function for adding a note
+
+  // FETCHING DATA FROM THE FIRESTORE DATABASE
+
+  // ADD NEW NOTE METHOD TO DATABASE
+
   const addNote = async (title, description, tag, id) => {
     //firebase database reference
+
     const notesCollectionRef = collection(db, "notes");
+
     await addDoc(notesCollectionRef, {
       userId: id,
       title: title,
       description: description,
       tag: tag,
     });
-    //todo api call
-    // const res = await fetch(`${host}/api/notes/addnote`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "auth-token": localStorage.getItem("token"),
-    //   },
-    //   body: JSON.stringify({ title, description, tag }),
-    // });
-    // const json = await res.json();
-    // console.log(json);
-    // if (json.errors) {
-    //   toast.error("Something went wrong");
-    //   return;
-    // }
-    // setNotes([...notes, json]);
+
     toast.success("Your Note has been added");
   };
-  //function for deleting a note
-  const deleteNote = async (id) => {
-    // api call
-    // const res = await fetch(`${host}/api/notes/deletenote/${id}`, {
-    //   method: "DELETE",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "auth-token": localStorage.getItem("token"),
-    //   },
-    // });
-    // const json = await res.json();
-    // console.log(json);
-    // const newNotes = notes.filter((note) => {
-    //   return note._id !== id;
-    // });
-    // if (json.errors) {
-    //   toast.error("Something went wrong");
-    //   return;
-    // }
-    // setNotes(newNotes);
 
+  // ADD NEW NOTE METHOD TO DATABASE
+
+  // DELETE A SELECTED NOTE FROM THE DATABASE METHOD
+
+  const deleteNote = async (id) => {
+    //user's selected note from the database
     const userNote = doc(db, "notes", id);
     await deleteDoc(userNote);
     toast.success("Note has deleted");
   };
-  //function for editing a note
+
+  // DELETE A SELECTED NOTE FROM THE DATABASE METHOD
+
+  // EDIT A SELECTED NOTE
+
   const editNote = async (id, title, description, tag) => {
-    // Api call
-    // const res = await fetch(`${host}/api/notes/updatenote/${id}`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "auth-token": localStorage.getItem("token"),
-    //   },
-    //   body: JSON.stringify({ title, description, tag }),
-    // });
+    //user's selected note from the database
     const userNote = doc(db, "notes", id);
     const newUpdatedNote = {
       title,
@@ -105,22 +81,10 @@ const NotesStates = (props) => {
     };
     await updateDoc(userNote, newUpdatedNote);
 
-    // let newNotesArr = JSON.parse(JSON.stringify(notes));
-    // let index = 0;
-    // while (index !== newNotesArr.length) {
-    //   const note = newNotesArr[index];
-    //   if (note._id === id) {
-    //     newNotesArr[index].title = title;
-    //     newNotesArr[index].description = description;
-    //     newNotesArr[index].tag = tag;
-    //     break;
-    //   }
-    //   index++;
-    // }
-
-    // setNotes(newNotesArr);
     toast.success("Your Note has been edited");
   };
+
+  // EDIT A SELECTED NOTE
 
   return (
     <NoteContext.Provider

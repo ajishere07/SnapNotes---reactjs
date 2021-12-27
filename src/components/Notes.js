@@ -10,9 +10,14 @@ import { AuthContext } from "../contexts/Auth";
 
 function Notes() {
   const navigate = useNavigate();
-  const context = useContext(NoteContext);
+
+  //contexts
+
+  const { notes, fetchNotes, editNote } = useContext(NoteContext);
   const { userAuthenticated } = useContext(AuthContext);
-  const { notes, fetchNotes, editNote } = context;
+
+  //contexts
+
   const [note, setNote] = useState({
     eid: "",
     etitle: "",
@@ -20,7 +25,10 @@ function Notes() {
     etag: "",
   });
   useEffect(() => {
+    //if user is not authenticated will redirect to login page
+
     if (userAuthenticated) {
+      //the fetchNotes is in NotesStates
       fetchNotes(userAuthenticated.uid);
     } else {
       navigate("/login");
