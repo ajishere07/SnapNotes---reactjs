@@ -29,17 +29,18 @@ function Notes() {
   const updateNoteModal = (currentNote) => {
     ref.current.click();
     setNote({
-      eid: currentNote._id,
+      eid: currentNote.id,
       etitle: currentNote.title,
       edescription: currentNote.desc,
       etag: currentNote.tag,
     });
   };
-  console.log(note.eid);
 
   const handleEdit = (e) => {
     e.preventDefault();
+    console.log(note.eid);
     editNote(note.eid, note.etitle, note.edescription, note.etag);
+
     refClose.current.click();
   };
   const inputHandle = (e) => {
@@ -161,8 +162,8 @@ function Notes() {
         ) : (
           notes.map((note) => (
             <NoteItem
-              key={note._id}
-              _id={note._id}
+              key={note.id}
+              id={note.id}
               title={note.title}
               desc={note.description}
               tag={note.tag}

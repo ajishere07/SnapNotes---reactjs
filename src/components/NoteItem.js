@@ -3,7 +3,7 @@ import NoteContext from "../contexts/notes/NoteContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function NoteItem({ title, desc, tag, _id, updateNoteModal }) {
+export default function NoteItem({ title, desc, tag, id, updateNoteModal }) {
   const context = useContext(NoteContext);
   const { deleteNote } = context;
   return (
@@ -13,13 +13,10 @@ export default function NoteItem({ title, desc, tag, _id, updateNoteModal }) {
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
           <p className="card-text">{desc}</p>
-          <i
-            className="far fa-trash-alt mx-2"
-            onClick={() => deleteNote(_id)}
-          />
+          <i className="far fa-trash-alt mx-2" onClick={() => deleteNote(id)} />
           <i
             className="far fa-edit mx-2"
-            onClick={() => updateNoteModal({ _id, title, desc, tag })}
+            onClick={() => updateNoteModal({ id, title, desc, tag })}
           />
         </div>
       </div>
