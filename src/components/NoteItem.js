@@ -7,10 +7,15 @@ export default function NoteItem({ title, desc, tag, id, updateNoteModal }) {
   const context = useContext(NoteContext);
   const { deleteNote } = context;
   return (
-    <div className="col-md-3">
+    <div className="col-md-4">
       <div className="card my-3">
         <div className="card-body">
-          <h5 className="card-title">{title}</h5>
+          <h5 className="card-title">
+            {title}
+
+            <span class="badge rounded-pill bg-primary mx-2">{tag}</span>
+          </h5>
+
           <p className="card-text">{desc}</p>
           <i className="far fa-trash-alt mx-2" onClick={() => deleteNote(id)} />
           <i

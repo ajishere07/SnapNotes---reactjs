@@ -26,13 +26,15 @@ function About() {
         setUserInfo(Info);
       });
 
-      if (profileImg === null) {
-        setProfileImg("http://cdn.onlinewebfonts.com/svg/img_258083.png");
-      } else {
+      if (userAuthenticated?.photoURL) {
         setProfileImg(userAuthenticated.photoURL);
+      } else {
+        setProfileImg(
+          "https://www.pikpng.com/pngl/m/80-805523_default-avatar-svg-png-icon-free-download-264157.png"
+        );
       }
     }
-  }, [profileImg]);
+  }, [photo]);
   console.log(userAuthenticated);
   console.log(profileImg);
   return (
@@ -87,7 +89,7 @@ function About() {
           color: "white",
           width: "30%",
         }}
-        disabled={loading || !photo}
+        disabled={loading}
         onClick={() => upload(photo, userAuthenticated, setLoading)}
       >
         Upload Image

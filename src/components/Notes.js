@@ -164,7 +164,7 @@ function Notes() {
         </div>
       </div>
       <h1>Your notes</h1>
-      <div className="row my-3">
+      <div className="row my-4">
         {notes.length === 0 ? (
           <h3>No notes; Add note for your tasks, ideas, assigments</h3>
         ) : (
