@@ -87,7 +87,7 @@ function About() {
           borderRadius: "20px",
           backgroundColor: "black",
           color: "white",
-          width: "400px",
+          width: "270px",
         }}
         disabled={loading}
         onClick={() => upload(photo, userAuthenticated, setLoading)}
