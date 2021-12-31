@@ -39,7 +39,7 @@ function About() {
   console.log(profileImg);
   return (
     <div className="container my-4">
-      <div className="d-flex my-2" style={{ width: "30%" }}>
+      <div className="d-flex my-2">
         <div style={{ position: "relative" }}>
           <img
             src={profileImg}
@@ -87,7 +87,7 @@ function About() {
           borderRadius: "20px",
           backgroundColor: "black",
           color: "white",
-          width: "30%",
+          width: "400px",
         }}
         disabled={loading}
         onClick={() => upload(photo, userAuthenticated, setLoading)}
