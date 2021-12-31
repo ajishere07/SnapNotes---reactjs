@@ -8,25 +8,30 @@ import NotesStates from "./contexts/notes/NotesStates";
 
 import AuthProvider from "./contexts/Auth";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { Todo } from "./components/Todo";
+import { TodoStates } from "./contexts/notes/TodoStates";
 function App() {
   return (
     <>
-      <AuthProvider>
-        <NotesStates>
-          <Navbar />
+      <TodoStates>
+        <AuthProvider>
+          <NotesStates>
+            <Navbar />
 
-          <div className="container">
-            <Routes>
-              <Route element={<ProtectedRoute />}>
-                <Route exact path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-              </Route>
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-            </Routes>
-          </div>
-        </NotesStates>
-      </AuthProvider>
+            <div className="container">
+              <Routes>
+                <Route element={<ProtectedRoute />}>
+                  <Route exact path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/todos" element={<Todo />} />
+                </Route>
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+              </Routes>
+            </div>
+          </NotesStates>
+        </AuthProvider>
+      </TodoStates>
     </>
   );
 }

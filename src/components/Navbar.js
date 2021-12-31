@@ -48,6 +48,16 @@ function Navbar() {
                 About
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                className={`nav-link ${
+                  location.pathname === "/about" ? "active" : ""
+                }`}
+                to="/todos"
+              >
+                To-dos
+              </Link>
+            </li>
           </ul>
           {userAuthenticated ? (
             <form className="d-flex">
