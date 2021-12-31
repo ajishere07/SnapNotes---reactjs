@@ -6,14 +6,20 @@ import { v4 as uuidv4 } from "uuid";
 import { CheckTodoItem } from "./CheckTodoItem";
 import { AuthContext } from "../contexts/Auth";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router";
 export const Todo = () => {
+  const navigate = useNavigate();
   const [inputData, setInputData] = useState("");
   const { checkedTodos } = useContext(TodoContext);
   const { todos, addTodo, fetchTodos } = useContext(TodoContext);
 
   const { userAuthenticated } = useContext(AuthContext);
   useEffect(() => {
-    fetchTodos(userAuthenticated.uid);
+    if (userAuthenticated) {
+      fetchTodos(userAuthenticated.uid);
+    } else {
+      navigate("/login");
+    }
   }, []);
   console.log(todos);
   return (
