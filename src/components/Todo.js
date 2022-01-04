@@ -48,8 +48,8 @@ export const Todo = () => {
         </button>
       </div>
       {checkedTodos.length !== 0 ? (
-        <h5 className="bg-success text-white text-uppercase px-3">
-          completed tasks
+        <h5 className="bg-success text-white text-uppercase px-3 position-relative">
+          completed tasks{" "}
         </h5>
       ) : (
         <h1></h1>

@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { useState } from "react/cjs/react.development";
 import { AuthContext } from "../contexts/Auth";
 import TodoContext from "../contexts/notes/TodoContext";
-
+import { deleteDoc, doc } from "@firebase/firestore";
+import { db } from "../configuration/firebaseConfig";
 export const CheckTodoItem = ({ todo, id }) => {
   const { checkedTodos, setCheckedTodos, pushUnCheckedTodos, unCheckTodo } =
     useContext(TodoContext);
@@ -21,6 +22,10 @@ export const CheckTodoItem = ({ todo, id }) => {
       unCheckTodo(id);
       // await setCheckedTodos(newCheckTodo);
     }
+  };
+  const eraseTodo = async (id) => {
+    const eraseTodoDoc = doc(db, "checkTodos", id);
+    await deleteDoc(eraseTodoDoc);
   };
   return (
     <>
@@ -43,6 +48,12 @@ export const CheckTodoItem = ({ todo, id }) => {
           value={todo}
           onChange={(e) => setInput(e.target.value)}
         />
+        <div className="d-flex flex-row justify-content-center align-items-center">
+          <i
+            className="far fa-trash-alt mx-2 align-middle"
+            onClick={() => eraseTodo(id)}
+          />
+        </div>
       </div>
     </>
   );
