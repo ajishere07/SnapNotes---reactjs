@@ -21,7 +21,7 @@ export const Todo = () => {
       navigate("/login");
     }
   }, []);
-  console.log(todos);
+
   return (
     <div className="container pt-5">
       <h1 className="mb-5">Add Your Tasks For Today</h1>
