@@ -35,8 +35,7 @@ function About() {
       }
     }
   }, [photo]);
-  console.log(userAuthenticated);
-  console.log(profileImg);
+
   return (
     <div className="container my-4">
       <div className="d-flex my-2">
