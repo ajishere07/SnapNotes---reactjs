@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/SnapNotes---reactjs/static/css/main.d8f90b98.css",
+    "main.js": "/SnapNotes---reactjs/static/js/main.953a2abc.js",
+    "index.html": "/SnapNotes---reactjs/index.html",
+    "main.d8f90b98.css.map": "/SnapNotes---reactjs/static/css/main.d8f90b98.css.map",
+    "main.953a2abc.js.map": "/SnapNotes---reactjs/static/js/main.953a2abc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d8f90b98.css",
+    "static/js/main.953a2abc.js"
+  ]
+}
