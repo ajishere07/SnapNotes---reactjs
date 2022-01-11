@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { TodoItem } from "./TodoItem";
 import { ToastContainer } from "react-toastify";
 import TodoContext from "../contexts/notes/TodoContext";
-import { v4 as uuidv4 } from "uuid";
+
 import { CheckTodoItem } from "./CheckTodoItem";
 import { AuthContext } from "../contexts/Auth";
 import "react-toastify/dist/ReactToastify.css";
