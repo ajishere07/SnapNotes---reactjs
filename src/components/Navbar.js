@@ -51,7 +51,7 @@ function Navbar() {
             <li className="nav-item">
               <Link
                 className={`nav-link ${
-                  location.pathname === "/about" ? "active" : ""
+                  location.pathname === "/todos" ? "active" : ""
                 }`}
                 to="/todos"
               >

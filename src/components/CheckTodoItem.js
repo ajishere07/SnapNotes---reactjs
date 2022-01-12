@@ -5,11 +5,10 @@ import TodoContext from "../contexts/notes/TodoContext";
 import { deleteDoc, doc } from "@firebase/firestore";
 import { db } from "../configuration/firebaseConfig";
 export const CheckTodoItem = ({ todo, id }) => {
-  const { checkedTodos, setCheckedTodos, pushUnCheckedTodos, unCheckTodo } =
-    useContext(TodoContext);
-  const [input, setInput] = useState("");
+  const { pushUnCheckedTodos, unCheckTodo } = useContext(TodoContext);
+  const [, setInput] = useState("");
   const [checked, setChecked] = useState(true);
-  const { todos, setTodos } = useContext(TodoContext);
+
   const { userAuthenticated } = useContext(AuthContext);
   const isUnChecked = async (id) => {
     setChecked(!checked);

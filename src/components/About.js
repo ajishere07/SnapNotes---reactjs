@@ -91,7 +91,7 @@ function About() {
         disabled={loading}
         onClick={() => upload(photo, userAuthenticated, setLoading)}
       >
-        Upload Image
+        {loading ? "Saving Changes..." : "Save Change"}
       </button>
     </div>
   );
