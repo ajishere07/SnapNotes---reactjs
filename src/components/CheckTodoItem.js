@@ -7,20 +7,11 @@ import { db } from "../configuration/firebaseConfig";
 export const CheckTodoItem = ({ todo, id }) => {
   const { pushUnCheckedTodos, unCheckTodo } = useContext(TodoContext);
   const [, setInput] = useState("");
-  const [checked, setChecked] = useState(true);
 
   const { userAuthenticated } = useContext(AuthContext);
   const isUnChecked = async (id) => {
-    setChecked(!checked);
-    if (checked === false) {
-      // setTodos([...todos, { id, todo }]);
-      pushUnCheckedTodos(todo, userAuthenticated.uid);
-      // let newCheckTodo = await checkedTodos.filter((todo) => {
-      //   return todo.id !== id;
-      // });
-      unCheckTodo(id);
-      // await setCheckedTodos(newCheckTodo);
-    }
+    pushUnCheckedTodos(todo, userAuthenticated.uid);
+    unCheckTodo(id);
   };
   const eraseTodo = async (id) => {
     const eraseTodoDoc = doc(db, "checkTodos", id);
@@ -35,7 +26,7 @@ export const CheckTodoItem = ({ todo, id }) => {
             id="tasksCheck"
             name="tasksCheck"
             type="checkbox"
-            checked="true"
+            checked={true}
             onChange={() => isUnChecked(id)}
             aria-label="Checkbox for following text input"
           />
