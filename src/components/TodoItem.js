@@ -6,14 +6,7 @@ import { AuthContext } from "../contexts/Auth";
 import TodoContext from "../contexts/notes/TodoContext";
 
 export const TodoItem = ({ id, todo }) => {
-  const {
-    checkedTodos,
-    setCheckedTodos,
-    todos,
-    setTodos,
-    pushCheckedTodos,
-    checkTodo,
-  } = useContext(TodoContext);
+  const { pushCheckedTodos, checkTodo } = useContext(TodoContext);
   const { userAuthenticated } = useContext(AuthContext);
   const [input, setInput] = useState(todo);
   const [checked, setChecked] = useState(true);

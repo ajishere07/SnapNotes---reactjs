@@ -15,7 +15,7 @@ export default function Login() {
       return;
     }
     try {
-      const result = await signInWithEmailAndPassword(
+      await signInWithEmailAndPassword(
         auth,
         credentials.email,
         credentials.password
