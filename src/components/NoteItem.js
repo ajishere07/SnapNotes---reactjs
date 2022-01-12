@@ -13,7 +13,7 @@ export default function NoteItem({ title, desc, tag, id, updateNoteModal }) {
           <h5 className="card-title">
             {title}
 
-            <span class="badge rounded-pill bg-primary mx-2">{tag}</span>
+            <span className="badge rounded-pill bg-primary mx-2">{tag}</span>
           </h5>
 
           <p className="card-text">{desc}</p>

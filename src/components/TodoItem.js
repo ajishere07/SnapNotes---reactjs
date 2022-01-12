@@ -74,18 +74,18 @@ export const TodoItem = ({ id, todo }) => {
           {updateBtnShow ? (
             <button
               type="button"
-              class="btn btn-success"
+              className="btn btn-success"
               onClick={() => reWriteTodo(id, input)}
             >
-              Done <i class="fas fa-check mx-2"></i>
+              Done <i className="fas fa-check mx-2"></i>
             </button>
           ) : (
             <button
               type="button"
-              class="btn btn-success d-none"
+              className="btn btn-success d-none"
               onClick={() => reWriteTodo(id, input)}
             >
-              none <i class="fas fa-check mx-2"></i>
+              none <i className="fas fa-check mx-2"></i>
             </button>
           )}
         </div>
