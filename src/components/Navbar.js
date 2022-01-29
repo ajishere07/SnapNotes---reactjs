@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { signOut } from "@firebase/auth";
 import { auth } from "../configuration/firebaseConfig";
 import { AuthContext } from "../contexts/Auth";
-
+import Logo from "../assets/images/snapnotes.png";
 function Navbar() {
   let location = useLocation();
   const { userAuthenticated } = useContext(AuthContext);
@@ -12,7 +12,12 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          Navbar
+          <img
+            src={Logo}
+            alt="logo"
+            style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+          />
+          <snap className="fs-3 ms-2 ">SnapNotes</snap>
         </Link>
         <button
           className="navbar-toggler"

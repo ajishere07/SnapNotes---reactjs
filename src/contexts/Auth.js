@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "@firebase/auth";
 import { auth } from "../configuration/firebaseConfig";
-import Loading from "../components/Loading.js";
+
+import Loader from "../assets/animations/Loader";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -14,7 +15,7 @@ const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  if (loading) return <Loading />;
+  if (loading) return <Loader />;
   return (
     <AuthContext.Provider value={{ userAuthenticated }}>
       {children}
