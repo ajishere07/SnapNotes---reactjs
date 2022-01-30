@@ -8,6 +8,7 @@ function Navbar() {
   let location = useLocation();
   const { userAuthenticated } = useContext(AuthContext);
 
+  console.log(userAuthenticated);
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -46,9 +47,11 @@ function Navbar() {
             <li className="nav-item">
               <Link
                 className={`nav-link ${
-                  location.pathname === "/about" ? "active" : ""
+                  location.pathname === `/about/${userAuthenticated.uid}`
+                    ? "active"
+                    : ""
                 }`}
-                to="/about"
+                to={`/about/${userAuthenticated.uid}`}
               >
                 About
               </Link>
