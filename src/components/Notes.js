@@ -170,11 +170,11 @@ function Notes() {
         ) : (
           notes.map((note) => (
             <NoteItem
-              key={note.id}
-              id={note.id}
-              title={note.title}
-              desc={note.description}
-              tag={note.tag}
+              key={note?.id}
+              id={note?.id}
+              title={note?.title}
+              desc={note?.description}
+              tag={note?.tag}
               updateNoteModal={updateNoteModal}
             />
           ))

@@ -55,14 +55,14 @@ export const Todo = () => {
 
       {checkedTodos.length !== 0 &&
         checkedTodos.map((item) => (
-          <CheckTodoItem key={item.id} id={item.id} todo={item.todo} />
+          <CheckTodoItem key={item?.id} id={item?.id} todo={item?.todo} />
         ))}
 
       <h5 className="bg-primary text-white text-uppercase px-3">Tasks</h5>
 
       {todos.length !== 0 ? (
         todos.map((item) => (
-          <TodoItem key={item.id} id={item.id} todo={item.todo} />
+          <TodoItem key={item?.id} id={item?.id} todo={item?.todo} />
         ))
       ) : (
         <h2 className="text-muted">No Tasks!</h2>

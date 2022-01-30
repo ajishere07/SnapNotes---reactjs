@@ -10,7 +10,7 @@ export default function Login() {
   let navigate = useNavigate();
   const handleFormSubmission = async (e) => {
     e.preventDefault();
-    if (!credentials.email || !credentials.password) {
+    if (!credentials?.email || !credentials?.password) {
       toast.warn("All fields should be filled");
       return;
     }

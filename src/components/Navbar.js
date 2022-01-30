@@ -47,11 +47,11 @@ function Navbar() {
             <li className="nav-item">
               <Link
                 className={`nav-link ${
-                  location.pathname === `/about/${userAuthenticated.uid}`
+                  location.pathname === `/about/${userAuthenticated?.uid}`
                     ? "active"
                     : ""
                 }`}
-                to={`/about/${userAuthenticated.uid}`}
+                to={`/about/${userAuthenticated?.uid}`}
               >
                 About
               </Link>
