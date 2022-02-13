@@ -8,7 +8,6 @@ function Navbar() {
   let location = useLocation();
   const { userAuthenticated } = useContext(AuthContext);
 
-  console.log(userAuthenticated);
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">

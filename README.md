@@ -1,3 +1,25 @@
+# About 
+SnapNotes is react project where you can save your notes on cloud. 
+
+# Live
+
+1. https://snapnotes-cae3b.web.app/
+2. https://snapnotes-cae3b.firebaseapp.com/
+
+# screenshots
+![SnapNotes - Notes on the cloud](https://user-images.githubusercontent.com/73534589/151700271-df2d7465-6e09-40e3-a6f3-5d4b59b2d33c.png)
+![SnapNotes - Notes on the cloud (1)](https://user-images.githubusercontent.com/73534589/151700293-ec81aed0-54e6-4b85-a0db-223785a9383f.png)
+![SnapNotes - Notes on the cloud (2)](https://user-images.githubusercontent.com/73534589/151700300-c816c582-60f2-403f-b2db-437919d2de55.png)
+
+# Feature
+1. Add, update, delete notes.
+2. Add, update, delete to-dos.
+3. authentications
+4. Change the user's profile pic.
+
+# Backend
+GOOGLE'S FIREBASE 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

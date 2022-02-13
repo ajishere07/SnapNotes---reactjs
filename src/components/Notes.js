@@ -46,7 +46,7 @@ function Notes() {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    console.log(note.eid);
+
     editNote(note.eid, note.etitle, note.edescription, note.etag);
 
     refClose.current.click();

@@ -14,11 +14,10 @@ function About() {
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const { userId } = useParams();
-  console.log(userId);
+
   const loadingImage = () => {
     if (imgLoading) {
       setImgLoading(false);
-      console.log(imgLoading);
     }
   };
   useEffect(() => {
@@ -100,7 +99,7 @@ function About() {
         {imgLoading && (
           <div className="d-flex flex-row justify-content-center align-items-center">
             <div class="spinner-border text-primary" role="status">
-              <span class="visually-hidden">Loading...</span>
+              <span className="visually-hidden">Loading...</span>
             </div>
           </div>
         )}
