@@ -45,6 +45,14 @@ export default function Login() {
   return (
     <>
       <form onSubmit={handleFormSubmission}>
+        <div className="container-md mt-2 bg-primary position-relative shadow-sm mb-5 rounded">
+        
+         <span className="text-light">
+             <b>EMAIL : </b> demo@gmail.com<br/> 
+               <b>PASSWORD : </b> demo1234
+          </span>
+         
+        </div>
         <div className="form-group my-4">
           <label htmlFor="email">Email address</label>
           <input
